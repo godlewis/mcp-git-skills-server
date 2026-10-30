@@ -1,0 +1,32 @@
+# mcp-git-skills-server 配置文件示例（需求文档 4.2 配置体系）
+# 优先级：命令行参数 > 环境变量 > 本文件 > 默认值
+# 查找顺序：--config <path> > SKILLS_CONFIG > ./skills-server.yaml
+#
+# 旧版环境变量 SKILLS_REPO_PATH / SKILLS_REPO_URL 仍然有效（映射为 default 命名空间单仓库），
+# 但本文件声明了 repos 时以本文件为准。
+
+# 日志级别：debug | info | warn | error（环境变量 SKILLS_LOG_LEVEL 可覆盖）
+logLevel: info
+
+# 启动时自动 git pull（需求文档 3.3）
+autoPullOnStartup: true
+
+# skills/list 分页页大小（1-1000）
+pageSize: 100
+
+# 兼容通道开关（需求文档 2.5）
+compat:
+  # 保留 list_skills / load_skill 等 POC 原生工具
+  legacyTools: true
+  # 保留 git-skills:// URI 前缀
+  legacyGitSkillsUris: true
+
+# 多技能仓库（需求文档 3.2）：命名空间作为 skill:// URI 的 authority 段
+repos:
+  - namespace: default
+    path: ./skills-repo
+    # url: https://github.com/your-org/skills-repo.git   # 配置了 url 才支持 clone/pull
+    # branch: main                                       # 固定分支（支持运行时切换）
+    # auth:                                              # 私有仓库认证（仅 http/https）
+    #   username: git-bot
+    #   password: ${GIT_BOT_TOKEN}                       # 支持 ${ENV_VAR} 环境变量插值

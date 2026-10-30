@@ -1,7 +1,9 @@
 ---
-name: 报销单处理
+name: expense-report
 description: 当用户提交费用报销、查询报销进度、补充报销凭证时使用。
-summary: 报销单创建、凭证上传指引、审批状态查询
+summary: 报销单处理：报销单创建、凭证上传指引、审批状态查询
+tags: [财务]
+version: 1.0.0
 ---
 
 # 报销单处理流程
